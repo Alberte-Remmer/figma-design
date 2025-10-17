@@ -1,0 +1,123 @@
+---
+import Logo from "@components/Logo.astro";
+import LoginButton from "@components/LoginButton.astro";
+---
+
+<header>
+  <nav>
+    <Logo />
+
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/case">Case Study</a></li>
+      <li><a href="/team">Team</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <LoginButton />
+  </nav>
+  <button class="burger-menu" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+<style>
+  @layer component {
+    header {
+      /* display og layout */
+      display: grid;
+      grid-template-columns: subgrid; /* Arver parent's (body) grid kolonner */
+      grid-column: full; /* Fylder hele skærmbredden */
+      /* Box model */
+      padding: 38px;
+      justify-content: space-between;
+      align-items: flex-start;
+      /* Visual */
+      background: rgba(27, 27, 27, 0.91);
+      backdrop-filter: blur(10.5px);
+
+      nav {
+        /* display og layout */
+        display: flex;
+        grid-column: content; /* nav placeres i content-området */
+
+        /* Box model */
+        justify-content: space-between; /* Logo til venstre, menu midt, knap til højre */
+        align-items: center;
+
+        > * {
+          flex-shrink: 0; /* Forhindrer elementer i at skrumpe */
+        }
+      }
+
+      /* Navigation links styling */
+
+      ul {
+        /* display og layout */
+        display: flex;
+
+        /* Box model */
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+
+        /* Typography & Content */
+        list-style: none; /* Fjerner bullet points */
+      }
+
+      li > a {
+        /* Typography & Content */
+        color: var(--color-primary);
+        font-family: var(--font-text);
+        font-size: 1.108rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28.365px;
+        text-decoration: none; /* Fjerner understreg på links */
+      }
+    }
+
+    /* Burger-menu */
+
+    .burger-menu {
+      display: none; /* Skjult som standard */
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 24px;
+      height: 18px;
+      justify-content: space-between;
+
+      span {
+        display: block;
+        height: 2px;
+        background: var(--color-primary);
+        transition: 0.3s;
+      }
+    }
+
+    /* Responsivitet  MANGLER*/
+
+    @media (width < 768px) {
+      .burger-menu {
+        display: flex; /* Vis burger-menu på små skærme */
+      }
+
+      header nav ul {
+        display: none; /* Skjul navigation links på små skærme */
+      }
+
+      /* Jeg kan ikke finde ud af at skjule login-button*/
+      /* Mere specifik selector for LoginButton */
+      nav :last-child {
+        display: none; /* Skjuler sidste element (LoginButton) */
+      }
+      /* Eller simpelt: */
+      LoginButton {
+        display: none;
+      }
+    }
+  }
+</style>

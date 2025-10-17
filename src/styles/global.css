@@ -1,1 +1,79 @@
 /* Globale styles her */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Fonts */
+  --font-heading: "Cabin", sans-serif;
+  --font-text: "Lato", sans-serif;
+
+  /* Responsive font sizes*/
+  --h1-size: clamp(2rem, 1.636rem + 1.818vi, 3rem);
+  --h2-size: clamp(1.75rem, 1.432rem + 1.591vi, 2.5rem);
+  --h3-size: clamp(1.25rem, 1.136rem + 0.568vi, 2rem);
+  --p-size: clamp(0.875rem, 0.83rem + 0.227vi, 1rem);
+
+  /* Responsive line heights */
+  --h1-line-height: clamp(2.4rem, 2rem + 2vi, 3.625rem);
+  --h2-line-height: clamp(2.1rem, 1.7rem + 2vi, 3.263rem);
+  --h3-line-height: clamp(1.5rem, 1.3rem + 1vi, 1.813rem);
+  --p-line-height: clamp(1.05rem, 1rem + 0.25vi, 1.475rem);
+
+  /* Font weights */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-normal: 400;
+
+  /* Colors */
+  --color-primary: #fff; /* white */
+  --color-secondary: #181818; /* black */
+  --color-tertiary: #f5f5f5; /* gray */
+  --color-quaternary: #ebebeb; /* lightgrey */
+  --color-accent: #fbc336; /* yellow */
+}
+
+/* Typography */
+h1 {
+  font-size: var(--h1-size);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--h1-line-height);
+}
+h2 {
+  font-size: var(--h2-size);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--h2-line-height);
+}
+h3 {
+  font-size: var(--h3-size);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--h3-line-height);
+}
+p {
+  font-size: var(--p-size);
+  font-family: var(--font-text);
+  font-weight: var(--font-weight-normal);
+}
+
+body {
+  display: grid;
+  /* auto: header (minimal), 1fr: main (fylder resten), auto: footer (minimal) */
+  grid-template-rows: auto 1fr auto;
+  /* Opretter 5 kolonner: margin | content (max 1200px) | margin med navngivne linjer */
+  grid-template-columns: [full-start] 1fr [content-start] minmax(0, 600px) [hero-start] minmax(0, 600px) [content-end] 1fr [hero-end full-end];
+  align-items: start;
+  > * {
+    /* Alle direkte børn (header, main, footer) placeres i det content-området */
+    grid-column: full;
+  }
+}
+main {
+  display: grid;
+  grid-template-columns: subgrid;
+}

@@ -1,5 +1,10 @@
 ---
 import "@styles/main.css";
+import Header from "@layouts/Header.astro";
+import Footer from "@layouts/Footer.astro";
+
+// Hent props med default værdi
+const { title = "AskExperts homepage" } = Astro.props;
 ---
 
 <html lang="en">
@@ -8,14 +13,31 @@ import "@styles/main.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
+    <title>{title}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+
     <style is:inline>
       @layer reset, global, components, overrides;
     </style>
   </head>
   <body>
-    <slot />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 
-<style></style>
+<style>
+  @layer component {
+  }
+</style>

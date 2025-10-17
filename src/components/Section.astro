@@ -1,0 +1,26 @@
+---
+
+---
+
+<section {...Astro.props}>
+  <slot />
+</section>
+
+<style>
+  @layer components {
+    section {
+      display: grid;
+      grid-column: content;
+      margin-block-start: clamp(2rem, 10vw, 8rem);
+
+      /* Alle elementer lige efter h5 */
+      h5 + * {
+        margin-block-start: clamp(0.25rem, 1vw, 1rem);
+      }
+
+      h2 + * {
+        margin-block-start: clamp(0.5rem, 2vw, 1rem);
+      }
+    }
+  }
+</style>

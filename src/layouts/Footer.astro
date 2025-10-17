@@ -1,0 +1,58 @@
+---
+import Logo from "@components/Logo.astro";
+---
+
+<footer>
+  <div class="footer-wrapper">
+    <Logo />
+    <hr />
+    <p>&#169; 2025 Consultalk. All rights reserved | Terms of Service | Privacy Policy</p>
+  </div>
+</footer>
+<style>
+  @layer component {
+    footer {
+      /* display og layout */
+      display: grid;
+      grid-template-columns: subgrid; /* Arver parent's (body) grid kolonner */
+      grid-column: full-start / full-end; /* Fylder hele skærmbredden */
+
+      /* Hvad sker der lige her?*/
+      display: flex;
+      flex-direction: column;
+
+      /* Box Model */
+      padding: 46px 0;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      /* Typography*/
+      font-family: var(--font-text);
+      color: var(--color-primary);
+
+      /* Visual */
+      background: var(--color-secondary);
+
+      hr {
+        /* Box model */
+        width: clamp(300px, 90vw, 1200px); /* clamp(minimum, foretrukket, maksimum) - vælger den bedste værdi (responsiv)*/
+        height: 1px;
+        border: none; /* Fjerner browser standard border */
+
+        /* Visual */
+        background: var(--color-tertiary);
+      }
+
+      .footer-wrapper {
+        /* display og layout */
+        display: flex;
+        flex-direction: column;
+
+        /* Box model */
+        align-items: center;
+        gap: 36px;
+      }
+    }
+  }
+</style>
