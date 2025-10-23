@@ -1,11 +1,11 @@
 ---
-import Sections from "@layouts/Sections.astro";
+import Section from "@layouts/Section.astro";
 import ArrowButton from "@components/ui/ArrowButton.astro";
 import financialProjections from "@data/financialProjections.json";
 import ScrollingContainer from "@components/content/ScrollingContainer.astro";
 ---
 
-<Sections data-theme="grey" class="flow">
+<Section data-theme="grey" class="flow">
   <div>
     <div class="flow">
       <h2>Financial Projections</h2>
@@ -17,7 +17,7 @@ import ScrollingContainer from "@components/content/ScrollingContainer.astro";
     </div>
   </div>
   <ScrollingContainer financialData={financialProjections.values} />
-</Sections>
+</Section>
 <style>
   @layer components {
     section h2 {

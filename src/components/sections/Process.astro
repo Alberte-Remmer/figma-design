@@ -1,5 +1,5 @@
 ---
-import Sections from "@layouts/Sections.astro";
+import Section from "@layouts/Section.astro";
 import Text from "@components/content/Text.astro";
 import IconText from "@components/content/IconText.astro";
 import { Image } from "astro:assets";
@@ -8,7 +8,7 @@ import Photo2Image from "@assets/images/photo2.png";
 import Photo3Image from "@assets/images/photo3.png";
 ---
 
-<Sections>
+<Section>
   <div class="flow">
     <Text subtitle="Process" title="Contact Us. It's Easy." text="Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative." />
     <IconText icon="phone" text="Call Today" subtext="+1 800 100 900" bgColor="#FFECBB" color="#DEAA27" />
@@ -24,7 +24,7 @@ import Photo3Image from "@assets/images/photo3.png";
       <Image src={Photo3Image} alt="Photo 3" />
     </div>
   </figure>
-</Sections>
+</Section>
 <style>
   @layer components {
     section {
