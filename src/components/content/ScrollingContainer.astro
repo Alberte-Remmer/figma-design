@@ -1,0 +1,71 @@
+---
+// @ts-nocheck
+import DynamicIcon from "@components/helpers/DynamicIcon.astro";
+const { financialData } = Astro.props;
+---
+
+<ul class="full-width">
+  {
+    financialData.map((item) => (
+      <li>
+        <DynamicIcon name={item.icon} width={35} height={35} />
+        <h3>{item.title}</h3>
+
+        <p>{item.description}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  @layer components {
+    ul {
+      margin-block-start: clamp(2rem, 10vw, 5rem);
+
+      grid-column: full; /* Gør at ul fylder hele grid-området */
+      list-style: none;
+      padding: 0; /* Hvis ikke vi fjerner padding, så virker det ikke. Normalt ville man lægge dette i et reset*/
+      display: flex; /* Gør ul til en flex-container */
+      overflow-x: auto; /* Så man kun kan scrolle (x-aksen) i selve ul elementet og ikke på hele siden*/
+      gap: 1rem;
+      --scroll-padding: max(1rem, 50% - 600px); /* Smart scroll padding: starter ved content-start, men kan scrolle til fuld bredde */
+      padding-inline: var(--scroll-padding); /* Smart centrering: beregnet side-padding på store skærme, minimum 1rem på små */
+
+      scroll-padding-inline: var(--scroll-padding); /* Snap to cards */
+      scroll-snap-type: x mandatory;
+
+      margin-block-end: clamp(2rem, 10vw, 10rem); /* Måske justeres? */
+
+      li {
+        /* flex er short for flex-grow flex-shrink flex-basis */
+        flex: 1 0 345px;
+        background: var(--color-quaternary);
+        color: var(--card-text-color);
+        border-radius: 20px;
+        padding: 44px 35px;
+        scroll-snap-align: start; /* Snapper til kortets start */
+        scroll-snap-stop: always; /* Tvinger stop ved hvert kort */
+        align-self: flex-start;
+
+        /* Alle børn undtagen det første får margin-start */
+        > * + * {
+          margin-block-start: clamp(0.5rem, 2vw, 1rem);
+        }
+        svg {
+          width: clamp(25px, 5vw, 35px);
+          height: clamp(25px, 5vw, 35px);
+        }
+      }
+
+      li:hover {
+        background-color: var(--color-secondary);
+        color: var(--color-primary);
+
+        /* Ikon farve skift ved hover */
+        svg {
+          color: var(--color-accent); /* Gul farve */
+        }
+      }
+    }
+  }
+</style>

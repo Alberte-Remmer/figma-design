@@ -15,6 +15,7 @@
   --h1-size: clamp(2rem, 1.636rem + 1.818vi, 3rem);
   --h2-size: clamp(1.75rem, 1.432rem + 1.591vi, 2.5rem);
   --h3-size: clamp(1.25rem, 1.136rem + 0.568vi, 2rem);
+  --h5-size: clamp(1rem, 0.909rem + 0.455vi, 1.2rem);
   --p-size: clamp(0.875rem, 0.83rem + 0.227vi, 1rem);
 
   /* Responsive line heights */
@@ -34,6 +35,24 @@
   --color-tertiary: #f5f5f5; /* gray */
   --color-quaternary: #ebebeb; /* lightgrey */
   --color-accent: #fbc336; /* yellow */
+
+  /* Square pattern */
+  --square-pattern: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"><path d="M7.47662 4.02206C6.50635 3.05178 5.53232 2.07774 4.56205 1.10745C4.28482 0.83023 3.80905 0.83023 3.53183 1.10745C2.56155 2.07774 1.59128 3.04803 0.621002 4.02206C0.343781 4.29929 0.343781 4.77506 0.621002 5.05229C1.59128 6.02258 2.5653 6.99661 3.53558 7.9669C3.8128 8.24412 4.28857 8.24412 4.56579 7.9669C5.53607 6.99661 6.51009 6.02258 7.48037 5.05229C7.63022 4.90244 7.69016 4.73011 7.69016 4.56527C7.69016 4.55403 7.69016 4.54654 7.69016 4.5353C7.69016 4.52781 7.69016 4.51657 7.69016 4.50908C7.69016 4.34424 7.63022 4.17191 7.47662 4.02206ZM4.04881 6.41968C3.41944 5.79031 2.79382 5.16468 2.16445 4.5353C2.79382 3.90593 3.41944 3.2803 4.04881 2.65092C4.67818 3.2803 5.3038 3.90593 5.93317 4.5353C5.3038 5.16468 4.67818 5.79031 4.04881 6.41968Z"/></svg>');
+
+  /* Space */
+  --space-4xs: clamp(0.125rem, 0.1033rem + 0.1087vw, 0.25rem);
+  --space-3xs: clamp(0.375rem, 0.3315rem + 0.2174vw, 0.5rem);
+  --space-2xs: clamp(0.75rem, 0.663rem + 0.4348vw, 1rem);
+  --space-xs: clamp(1.125rem, 0.9946rem + 0.6522vw, 1.5rem);
+  --space-s: clamp(1.5rem, 1.3261rem + 0.8696vw, 2.375rem);
+  --space-m: clamp(2.25rem, 1.9891rem + 1.3043vw, 2.875rem);
+  --space-l: clamp(3rem, 2.6522rem + 1.7391vw, 4rem);
+  --space-xl: clamp(4.5rem, 3.9783rem + 2.6087vw, 6rem);
+  --space-2xl: clamp(6rem, 5.3043rem + 3.4783vw, 8rem);
+  --space-3xl: clamp(9rem, 7.9565rem + 5.2174vw, 12rem);
+
+  /* Flow-space */
+  --flow-space: clamp(0.2rem, 1.5vw, 1rem);
 }
 
 /* Typography */
@@ -55,25 +74,73 @@ h3 {
   font-weight: var(--font-weight-semibold);
   line-height: var(--h3-line-height);
 }
+h4 {
+  font-size: var(--p-size);
+  font-family: var(--font-text);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-color, var(--color-secondary)); /* Bruger --text-color hvis tilgængelig, ellers fallback */
+  letter-spacing: 2.32px;
+  text-transform: uppercase;
+  font-family: var(--font-text);
+}
+
+h5 {
+  font-family: var(--font-heading);
+  font-size: var(--h5-size);
+  font-weight: var(--font-weight-semibold);
+}
 p {
   font-size: var(--p-size);
   font-family: var(--font-text);
   font-weight: var(--font-weight-normal);
 }
 
+/* Data-themes */
+
+[data-theme="dark"] {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+[data-theme="light"] {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+[data-theme="grey"] {
+  background-color: var(--color-tertiary);
+  color: var(--color-secondary);
+}
+
+[data-theme="accent"] {
+  background-color: var(--color-accent);
+  color: var(--color-secondary);
+}
+
+[data-theme="phone"] {
+  background-color: #ffecbb;
+  color: #deaa27;
+}
+
+/* Flow-space */
+
+.flow > * + * {
+  margin-top: var(--flow-space, clamp(0.2rem, 1.5vw, 1rem));
+}
+
+/* Layout */
 body {
   display: grid;
-  /* auto: header (minimal), 1fr: main (fylder resten), auto: footer (minimal) */
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto; /* auto: header (minimal), 1fr: main (fylder resten), auto: footer (minimal) */
   /* Opretter 5 kolonner: margin | content (max 1200px) | margin med navngivne linjer */
   grid-template-columns: [full-start] 1fr [content-start] minmax(0, 600px) [hero-start] minmax(0, 600px) [content-end] 1fr [hero-end full-end];
-  align-items: start;
+  align-items: start; /* Justerer indholdet i starten af hver sektion */
   > * {
-    /* Alle direkte børn (header, main, footer) placeres i det content-området */
-    grid-column: full;
+    grid-column: full; /* Alle direkte børn (header, main, footer) placeres fra full-start til full-end */
   }
 }
+
 main {
   display: grid;
-  grid-template-columns: subgrid;
+  grid-template-columns: subgrid; /* Arver bodyes 5 kolonner. Jeg kan gennem subgrid placere mains indhold*/
 }

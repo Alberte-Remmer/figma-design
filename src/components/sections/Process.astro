@@ -1,0 +1,105 @@
+---
+import Sections from "@layouts/Sections.astro";
+import Text from "@components/content/Text.astro";
+import IconText from "@components/content/IconText.astro";
+import { Image } from "astro:assets";
+import Photo1Image from "@assets/images/photo1.png";
+import Photo2Image from "@assets/images/photo2.png";
+import Photo3Image from "@assets/images/photo3.png";
+---
+
+<Sections>
+  <div class="flow">
+    <Text subtitle="Process" title="Contact Us. It's Easy." text="Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative." />
+    <IconText icon="phone" text="Call Today" subtext="+1 800 100 900" bgColor="#FFECBB" color="#DEAA27" />
+    <IconText icon="clock" text="Monday To Friday" subtext="9AM - 5PM" bgColor="#A4EDA4" color="#4EAF4E" />
+    <IconText icon="pin" text="USA Office" subtext="195 Devonshire St Boston, MA 02110" bgColor="#EAEAEA" color="#181818" />
+  </div>
+  <figure>
+    <div>
+      <Image src={Photo1Image} alt="Photo 1" />
+    </div>
+    <div>
+      <Image src={Photo2Image} alt="Photo 2" />
+      <Image src={Photo3Image} alt="Photo 3" />
+    </div>
+  </figure>
+</Sections>
+<style>
+  @layer components {
+    section {
+      display: grid;
+      position: relative;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+
+      img {
+        border-radius: 20px;
+      }
+    }
+    figure {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    figure > div:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  @media (width > 768px) {
+    section > div:nth-child(1) {
+      grid-column: content-start/ hero-start;
+    }
+    figure {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column: hero-start;
+      gap: 10px;
+
+      > div:nth-child(1) {
+        grid-column: 1;
+      }
+      > :nth-child(2) {
+        gap: 10px;
+      }
+    }
+    figure::before {
+      --_square-size: var(--square-size, 1rem);
+      --_square-half: calc(var(--square-size) / 2);
+      --_square-sum: calc(var(--square-count) * var(--square-size));
+      --square-count: 12;
+      --square-size: 1.6rem;
+
+      --_square-size: var(--square-size, 1rem);
+      --_square-half: calc(var(--square-size) / 2);
+      --_square-sum: calc(var(--square-count) * var(--square-size));
+      content: "";
+      position: absolute;
+      top: -1rem;
+      right: 5rem;
+
+      /* Fjern transform, så placering matcher after */
+      inline-size: calc(round(var(--_square-sum), var(--_square-size)) - var(--_square-half));
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #be965d, #976f40, #c99b61, #f0be7b, #ffcb85, #eebc79, #c0935b, #976f40) 0 0 / 100% 100%;
+      mask:
+        var(--square-pattern) 0 0 / var(--_square-size) var(--_square-size),
+        var(--square-pattern) var(--_square-half) var(--_square-half) / var(--_square-size) var(--_square-size);
+      z-index: -1;
+    }
+    figure::after {
+      content: "";
+      position: absolute;
+      top: 20rem;
+      right: 31rem;
+      background: #4eaf4e;
+      width: 260px;
+      height: 183px;
+      z-index: -1;
+      border-radius: 20px;
+    }
+  }
+</style>

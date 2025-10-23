@@ -1,0 +1,43 @@
+---
+import coreValues from "@data/coreValues.json";
+import Text from "@components/content/Text.astro";
+import Sections from "@layouts/Sections.astro";
+import PrimaryButton from "@components/ui/PrimaryButton.astro";
+import ValueCard from "@components/ui/ValueCard.astro";
+---
+
+<Sections {...Astro.props} data-theme={Astro.props["data-theme"] ?? "dark"}>
+  <div>
+    <div>
+      <Text subtitle="Growing with our Clients" title={coreValues.title} text={coreValues.subtitle} />
+    </div>
+    <div>
+      <PrimaryButton url="#0" text="Get in touch" variant={Astro.props["button-variant"] ?? "light"} />
+    </div>
+  </div>
+  <ValueCard />
+</Sections>
+<style>
+  @layer components {
+    div:nth-child(2) {
+      display: flex;
+      place-self: center;
+    }
+
+    @media (width > 768px) {
+      section :first-child > div {
+        margin-block-start: clamp(2rem, 10vw, 6rem);
+        margin-block-end: clamp(1rem, 10vw, 2rem);
+      }
+      div {
+        display: grid;
+        grid-template-columns: subgrid; /* Arver kolonneopdelingen fra body, så indholdet står ved siden af hinanden. */
+
+        /* snakker til nr 2 div (pilene) */
+        > div:nth-child(2) {
+          place-self: end;
+        }
+      }
+    }
+  }
+</style>

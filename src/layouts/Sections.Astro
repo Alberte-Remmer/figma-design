@@ -1,0 +1,27 @@
+---
+
+---
+
+<!-- Astro.props gør det muligt at tilføje ekstra HTML-attributter (class, id, osv.) til sektionen -->
+<section {...Astro.props}>
+  <slot />
+</section>
+
+<style>
+  @layer components {
+    section {
+      display: grid; /* Skal være grid for at kunne bruge grid-kolonner */
+      grid-template-columns: subgrid; /* Arver kolonner fra parent grid (body) */
+      grid-column: full; /* Gør sektionen fuld bredde som standard */
+
+      /* Alle direkte børn af section placeres i content-området */
+      > * {
+        grid-column: content;
+      }
+      /* Børn med klassen full-bleed fylder hele grid-området */
+      .full-bleed {
+        grid-column: full;
+      }
+    }
+  }
+</style>

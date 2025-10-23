@@ -1,0 +1,41 @@
+---
+import DynamicIcon from "@components/helpers/DynamicIcon.astro";
+const { icon, text, subtext, color, bgColor = "#fff" } = Astro.props;
+---
+
+<ul>
+  <li>
+    <div style={`background: ${bgColor};`}>
+      <DynamicIcon name={icon} width={35} height={35} color={color} />
+    </div>
+    <div>
+      <p>{text}</p>
+      <h5>{subtext}</h5>
+    </div>
+  </li>
+</ul>
+
+<style>
+  @layer component {
+    ul {
+      display: flex;
+      place-items: center;
+      li {
+        display: flex;
+        align-items: center; /* centrerer vertikalt */
+        list-style: none;
+        gap: 20px;
+      }
+      div:first-child {
+        border-radius: 100%;
+        width: clamp(36px, 8vw, 60px);
+        height: clamp(36px, 8vw, 60px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: none;
+      }
+    }
+  }
+</style>

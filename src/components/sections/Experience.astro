@@ -1,0 +1,43 @@
+---
+import Text from "@components/content/Text.astro";
+import Sections from "@layouts/Sections.astro";
+import Stats from "@components/ui/Stats.astro";
+---
+
+<Sections data-theme="accent">
+  <div class="wrapper">
+    <div>
+      <Text subtitle="experience" title="More than 25 years of experience" text="3000+ our clients are insured around the World" />
+    </div>
+    <div>
+      <Stats percent={85} label="Consistency" />
+      <Stats percent={95} label="Improvement" />
+      <Stats percent={90} label="Branching" />
+    </div>
+  </div>
+
+  <style>
+    @layer components {
+      .wrapper {
+        margin-block-start: clamp(2rem, 10vw, 10rem);
+        margin-block-end: clamp(2rem, 10vw, 10rem);
+      }
+
+      @media (width > 768px) {
+        .wrapper {
+          display: grid;
+          grid-template-columns: subgrid;
+          gap: 2rem;
+
+          > :nth-child(2) {
+            display: flex;
+
+            place-self: end;
+            gap: 4rem;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  </style>
+</Sections>

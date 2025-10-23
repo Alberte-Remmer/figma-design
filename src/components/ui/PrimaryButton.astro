@@ -1,0 +1,18 @@
+---
+const { url, text, variant } = Astro.props;
+---
+
+<a href={url} data-theme={variant}>{text}</a>
+
+<style>
+  @layer components {
+    a {
+      display: inline-flex; /* Flex - Så jeg kan centrere teksten */
+      align-self: flex-start; /* Knappen fylder kun sit indhold */
+      text-decoration: none;
+      border-radius: 42px;
+      font-size: var(--p-size);
+      padding: clamp(8px, 2vw, 12px) clamp(16px, 5vw, 24px); /* Juster padding baseret på viewport-størrelse (1vw = 1% browserens bredde, 1vh = 1% af browserens højde)*/
+    }
+  }
+</style>

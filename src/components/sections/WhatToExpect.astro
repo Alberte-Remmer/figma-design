@@ -1,0 +1,95 @@
+---
+import Text from "@components/content/Text.astro";
+import Sections from "@layouts/Sections.astro";
+import CheckmarkText from "@components/content/CheckmarkText.astro";
+import { Image } from "astro:assets";
+import ExpectImage from "@assets/images/expect.jpg";
+---
+
+<Sections>
+  <div>
+    <div>
+      <figure>
+        <Image src={ExpectImage} alt="What to expect" />
+      </figure>
+    </div>
+    <div class="flow">
+      <Text subtitle="we'll work with you" title="What To Expect" text="Our collaboration is built on transparency, efficiency, and measurable results. Together, we create strategies tailored to your unique needs and goals." />
+      <CheckmarkText text1="Collaborate to build actionable strategies that drive sustainable growth and deliver tangible outcomes." text2="Identify opportunities to optimize processes and implement impactful solutions with measurable results." />
+    </div>
+  </div>
+</Sections>
+
+<style>
+  @layer components {
+    /* SKAL SLETTES - SAT IND SÅ MAN KAN SE PSEUDOELEMENTERNE*/
+    section {
+      margin-block-start: clamp(2rem, 10vw, 10rem);
+      margin-block-end: clamp(2rem, 10vw, 10rem);
+    }
+    figure {
+      display: grid;
+      margin-inline: auto;
+      position: relative;
+
+      img {
+        border-radius: 20px;
+      }
+
+      &::before {
+        --_square-size: var(--square-size, 1rem);
+        --_square-half: calc(var(--square-size) / 2);
+        --_square-sum: calc(var(--square-count) * var(--square-size));
+        --square-count: 12;
+        --square-size: 1.34rem;
+
+        --_square-size: var(--square-size, 1rem);
+        --_square-half: calc(var(--square-size) / 2);
+        --_square-sum: calc(var(--square-count) * var(--square-size));
+        content: "";
+        position: absolute;
+        top: -1rem;
+        right: 12rem;
+
+        /* Fjern transform, så placering matcher after */
+        inline-size: calc(round(var(--_square-sum), var(--_square-size)) - var(--_square-half));
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #be965d, #976f40, #c99b61, #f0be7b, #ffcb85, #eebc79, #c0935b, #976f40) 0 0 / 100% 100%;
+        mask:
+          var(--square-pattern) 0 0 / var(--_square-size) var(--_square-size),
+          var(--square-pattern) var(--_square-half) var(--_square-half) / var(--_square-size) var(--_square-size);
+        z-index: -2;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 6rem;
+        right: -1rem;
+        background: #4eaf4e;
+        width: 170px;
+        height: 183px;
+        z-index: -1;
+        border-radius: 20px;
+      }
+    }
+
+    @media (width > 768px) {
+      /* Min første barn (div) bliver til en grid container*/
+      section > :first-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      figure::before {
+        top: -2rem;
+        right: 26rem;
+      }
+      figure::after {
+        top: -1rem;
+        right: 28rem;
+      }
+    }
+  }
+</style>

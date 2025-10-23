@@ -1,0 +1,52 @@
+---
+import Sections from "@layouts/Sections.astro";
+import ArrowButton from "@components/ui/ArrowButton.astro";
+import financialProjections from "@data/financialProjections.json";
+import ScrollingContainer from "@components/content/ScrollingContainer.astro";
+---
+
+<Sections data-theme="grey" class="flow">
+  <div>
+    <div class="flow">
+      <h2>Financial Projections</h2>
+      <p>Financial projections are essential for planning and monitoring a company's performance. They provide insights into potential revenue, expenses, and profitability over specific periods.</p>
+    </div>
+    <div>
+      <ArrowButton direction="left" />
+      <ArrowButton direction="right" />
+    </div>
+  </div>
+  <ScrollingContainer financialData={financialProjections.values} />
+</Sections>
+<style>
+  @layer components {
+    section h2 {
+      margin-block-start: clamp(2rem, 10vw, 10rem);
+    }
+    /* snakker til nr 2 div (pilene) */
+    div:nth-child(2) {
+      display: flex;
+      place-self: center;
+      gap: 1rem;
+    }
+    @media (width > 768px) {
+      div {
+        display: grid;
+        grid-template-columns: subgrid; /* Arver kolonneopdelingen fra body, så indholdet står ved siden af hinanden. */
+
+        /* snakker til nr 2 div (pilene) */
+        > div:nth-child(2) {
+          display: flex; /* Gør pilenes container til en flexbox, så knapperne kan ligge på række */
+          place-self: end; /* Flytter pilene til højre og nederst i containeren*/
+          gap: 2rem; /* Giver luft mellem pilene */
+        }
+      }
+    }
+    @media (width < 768px) {
+      /* Skjul pilene (anden div) inde i første div i sektionen */
+      section > div > div:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+import DynamicIcon from "@components/helpers/DynamicIcon.astro";
+import coreValues from "@data/coreValues.json";
+import ReadMoreButton from "@components/ui/ReadMoreButton.astro";
+---
+
+<ul>
+  {
+    coreValues.values.map((value) => (
+      <li data-theme="light">
+        <span class="icon-bg" data-theme="dark">
+          <DynamicIcon name={value.icon} width={"clamp(24, 7vw, 40)"} height={"clamp(24, 7vw, 40)"} />
+        </span>
+
+        <h3>{value.title}</h3>
+        <p>{value.description}</p>
+        <ReadMoreButton url={value.link.url} />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  @layer components {
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start; /* Kortene fylder kun deres naturlige højde */
+      margin-block-end: clamp(2rem, 10vw, 10rem);
+
+      li {
+        border-radius: 20px;
+        padding: clamp(18px, 5vw, 36px) clamp(12px, 4vw, 23px);
+        list-style: none;
+      }
+      .icon-bg {
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(36px, 10vw, 56px);
+        height: clamp(36px, 10vw, 56px);
+        z-index: 1;
+      }
+    }
+
+    @media (width > 768px) {
+      ul {
+        flex-direction: row;
+        li {
+          width: calc((100% - 3 * 16px) / 4);
+        }
+      }
+    }
+  }
+</style>

@@ -1,9 +1,16 @@
 ---
+//Layout
 import Layout from "@layouts/Layout.astro";
+
+//Components Sections
+
+import Subscribe from "@components/ui/Subscribe.astro";
+import Values from "@components/sections/Values.astro";
+import OurVision from "@components/sections/OurVision.astro";
 ---
 
 <Layout title="About">
-  <!-- Dit indhold -->
+  <OurVision />
+  <Values data-theme="grey" button-variant="dark" />
+  <Subscribe />
 </Layout>
-
-<style></style>

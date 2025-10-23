@@ -2,8 +2,7 @@
 import "@styles/main.css";
 import Header from "@layouts/Header.astro";
 import Footer from "@layouts/Footer.astro";
-
-// Hent props med default værdi
+// Titlen kan sendes som en prop fra sider, der bruger layoutet
 const { title = "AskExperts homepage" } = Astro.props;
 ---
 
@@ -37,7 +36,4 @@ const { title = "AskExperts homepage" } = Astro.props;
   </body>
 </html>
 
-<style>
-  @layer component {
-  }
-</style>
+<style></style>

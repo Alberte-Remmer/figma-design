@@ -1,0 +1,29 @@
+---
+import ArrowRight from "@icons/arrow--right.svg";
+const { url } = Astro.props;
+---
+
+<button>
+  <a href={url}>Read More</a>
+  <ArrowRight width={21} height={17} />
+</button>
+<style>
+  @layer components {
+    button {
+      display: inline-flex; /* Flex - Så jeg kan centrere teksten */
+      align-self: flex-start; /* Knappen fylder kun sit indhold */
+
+      background-color: transparent;
+      border-radius: 42px;
+      gap: 1rem;
+
+      a {
+        text-decoration: none;
+        color: var(--color-secondary);
+      }
+      svg {
+        color: var(--color-secondary);
+      }
+    }
+  }
+</style>

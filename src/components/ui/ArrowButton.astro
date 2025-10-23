@@ -1,0 +1,41 @@
+---
+import ArrowRight from "@icons/arrow--right.svg";
+import ArrowLeft from "@icons/arrow-left.svg";
+
+const { direction = "right" } = Astro.props;
+---
+
+<button>
+  {/* Hvis direction er 'left', vises ArrowLeft-ikonet, ellers vises ArrowRight-ikonet */}
+  {direction === "left" ? <ArrowLeft width={21} height={17} /> : <ArrowRight width={21} height={17} />}
+</button>
+
+<style>
+  @layer component {
+    button {
+      background-color: var(--color-secondary);
+      border-radius: 100%;
+      width: clamp(36px, 8vw, 60px);
+      height: clamp(36px, 8vw, 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: clamp(14px, 3vw, 21px);
+        height: clamp(11px, 2vw, 17px);
+        color: var(--color-primary);
+      }
+
+      &:hover {
+        background-color: var(--color-accent);
+
+        svg {
+          color: var(--color-secondary);
+        }
+      }
+    }
+  }
+</style>

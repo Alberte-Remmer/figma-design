@@ -1,0 +1,62 @@
+---
+const { percent, label } = Astro.props;
+---
+
+<article>
+  <div class="stat" style={`--percent: ${percent}`}></div>
+  <p>{label}</p>
+</article>
+
+<style>
+  @layer component {
+    article {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat {
+      /* Laver stat til en container, så jeg kan indstille mine font-size der navigerer efter størrelsen på containeren. Så bliver den automatisk mindre ved små skærme*/
+      container: stat/inline-size;
+
+      --actualPercent: calc(var(--percent) * 1%); /* 35%, 75%*/
+      --border-width: 5px;
+      aspect-ratio: 1;
+      width: 150px;
+      border-radius: calc(Infinity * 1px);
+      border: var(--border-width) solid transparent;
+      background: 
+    /* Jeg laver et billede ovenpå som er hvidt*/
+        conic-gradient(var(--color-accent)) padding-box,
+        /* Selve baggrunden også lavet som et billede*/ conic-gradient(#fff var(--actualPercent), rgb(185, 184, 184) 0) border-box;
+
+      display: grid;
+
+      counter-reset: c var(--percent);
+
+      &::before,
+      &::after {
+        grid-area: 1 / 1;
+      }
+
+      &::after {
+        content: counter(c, decimal-leading-zero) "%";
+        place-self: center;
+        /* Så bliver størrelsen sat efter den nærmeste container*/
+        font-size: 30cqw;
+      }
+
+      &::before {
+        content: "";
+        aspect-ratio: 1;
+        border-radius: 99px;
+        width: 25px;
+        offset-path: border-box;
+        offset-distance: var(--actualPercent);
+        offset-anchor: 50% calc(50% - var(--border-width) / 2);
+        background: #000;
+        border: #fff solid 4px;
+      }
+    }
+  }
+</style>
